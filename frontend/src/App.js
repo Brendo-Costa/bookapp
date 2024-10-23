@@ -48,20 +48,25 @@ function App() {
 
 
   //Deleta um livro no sistema.
-  const deleteBook = async () => {
+  const deleteBook = async (id) => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/books/delete/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': 'application/json',
+        },
       });
+      const data = response.json();
+      console.log(data)
       setBooks((prev) => prev.filter((book) => book.id !== id));
     } catch (error) {
       console.log(error);
     }
   };
 
-  
-  return (
 
+  return (
     <>
       <h1>Book Website</h1>
 
@@ -86,10 +91,10 @@ function App() {
           <p>Title: {book.title}</p>
           <p>Release Year: {book.release_year}</p>
           <br />
+          <button onClick={() => deleteBook(book.id)}> Delete</button>
         </div>
       ))}
     </>
-    
   );
 }
 

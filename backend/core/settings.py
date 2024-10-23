@@ -139,9 +139,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
  """
 
 # Em desenvolvimento (Habilite todas as fontes de solicitação). 
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ALL_ORIGINS = True
 
-# Endereços específicos.
-#CORS_ALLOW_ALL_ORIGINS = [
-#    "http://localhost:3000"
-#]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # URL do seu frontend React
+]
+
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
