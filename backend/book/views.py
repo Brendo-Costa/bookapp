@@ -25,6 +25,15 @@ def create_book(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['DELETE'])
+def delete_book(request, id):
+    try:
+        book = get_object_or_404(Book, id=id)
+        book.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except:
+        return Response(status=status.HTTP_404_BAD_REQUEST)
+
 class BookDeleteAPIView(APIView):
     
     def delete(self, request, id, format=None):  
